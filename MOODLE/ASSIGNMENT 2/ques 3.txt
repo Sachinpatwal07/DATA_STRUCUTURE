@@ -1,0 +1,190 @@
+#include <iostream>
+#include<stdlib.h>
+
+using namespace std;
+
+void clean()
+{
+
+    system("cls");
+     cout<<"____________________________________________________________\n";
+    cout<<"\n              CREATED BY SACHIN PATWAL                \n";
+    cout<<"____________________________________________________________\n\n";
+}
+
+struct node
+{
+    int info;
+    node * next;
+};
+node* list1=NULL;
+node* sub1=NULL;
+node* sub2=NULL;
+
+int sizeofll(node *list1)     //CALCULATES NUMBER OF NODES
+ { node *ptr=list1;
+   int n=0;
+   while(ptr!=NULL)
+   {
+       n++;
+       ptr=ptr->next;
+
+   }
+   return (n);
+
+ }
+
+ void insertione()
+ {
+     node *temp=new node;
+      node *temp1=list1;
+     cout<<"\n\nENTER THE ELEMENT:";
+     cin>>temp->info;
+     temp->next=NULL;
+
+     if(list1==NULL)
+        list1=temp;
+     else
+     {
+        while(temp1->next!=NULL)
+        temp1=temp1->next;
+        temp1->next=temp;
+
+     }
+cout<<"\n\nINSETION SUCCESSFUL\n\n";
+system("pause");
+
+ }
+
+
+ void display(node *list1,node*sub1,node*sub2)
+ {
+     cout<<"\n\n"; int a;
+     node *tmp;
+     clean();
+     cout<<"WHICH LIST U WANT TO SEE";
+
+     cout<<"\n\nPRESS 1.FOR DISPLAY FULL LIST\n";
+     cout<<"\nPRESS 2.FOR DISPLAY SUB LIST 1\n";
+     cout<<"\nPRESS 3.FOR DISPLAY SUB LIST 2\n";
+     cout<<"\n\nENTER YOUR CHOISE:";
+     cin>>a;
+      if(a==1)
+     tmp=list1;
+      if(a==2)
+        tmp=sub1;
+     if(a==3)
+        tmp=sub2;
+     if(tmp==NULL)
+     {
+         cout<<"\nLIST IS EMPTY\n\n";
+
+     }
+    else
+    {
+        while(tmp!=NULL)
+     {
+         cout<<tmp->info<<" => ";
+         tmp=tmp->next;
+     }   cout<<"NULL"<<endl;
+
+     }
+          cout<<"\n\n";
+        system("pause");
+
+
+
+ }
+
+void ListSplit(node * &list1,node * &sub1,node * &sub2)    //SPLIT THE LIST INTO TWO PARTS
+ {
+        int n=sizeofll(list1);
+        node *ptr=list1;
+        node *last=NULL;
+        node *last1=NULL;
+         int i=0;
+        while(ptr!=NULL)
+        {
+            node * temp=new node;
+             temp->info=ptr->info;
+             temp->next=NULL;
+             if(i<n/2)
+          {
+
+             if(sub1==NULL)
+             {
+                 sub1=temp;
+                 last=temp;
+             }
+             else
+             {
+                 last->next=temp;
+                 last=last->next;
+             }
+
+
+
+        }
+         else
+        {
+
+            if(sub2==NULL)
+             {
+                 sub2=temp;
+                 last1=temp;
+             }
+             else
+             {
+                 last1->next=temp;
+                 last1=last1->next;
+             }
+
+
+
+        }
+
+        ptr=ptr->next;
+        i++;
+
+    }
+    cout<<"\n\nSPLIT SUCCESSFULL\n\n";
+      system("pause");
+ }
+ int main()
+ {  clean();
+      int a;
+   while(1)
+  {
+       clean();
+
+
+    cout<<"1.FOR INSERTION IN THE LIST\n\n";
+    cout<<"2.FOR DISPLAYING ALL ELEMENTS IN LINK LIST\n\n";
+    cout<<"3.TO CALL SPLIT FUNCTION\n\n";
+    cout<<"4.FOR EXIT\n";
+    cout<<"\nENTER YOUR CHOISE:";
+
+
+    cin>>a;
+    switch(a)
+    {
+
+        case 1: insertione();
+                   break;
+        case 2: display(list1,sub1,sub2);
+                   break;
+        case 3: ListSplit(list1,sub1,sub2);
+                  break;
+        case 4:   clean();
+                 cout<<"\nPROGRAM HAS CLOSED SUSSESFULLY\n\n";
+                  exit(0);
+        default: cout<<"\n\nINVALID OPTION\n\n";
+                    system("pause");
+                   break;
+
+    }
+
+  }
+
+    return 0;
+ }
