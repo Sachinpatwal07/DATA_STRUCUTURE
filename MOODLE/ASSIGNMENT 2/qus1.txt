@@ -1,183 +1,161 @@
 #include <iostream>
+
 #include<string.h>
+
 #include<stdlib.h>
+
 #include<ctype.h>
+
 int total;
 
 using namespace std;
 
-void clean()
-{
-    system("cls");
-    cout<<"____________________________________________________________\n";
-    cout<<"\n              CREATED BY SACHIN PATWAL                \n";
-    cout<<"____________________________________________________________\n\n";
+void clean() {
+  system("cls");
+  cout << "____________________________________________________________\n";
+  cout << "\n              CREATED BY SACHIN PATWAL                \n";
+  cout << "____________________________________________________________\n\n";
 }
 
-
-struct node
-{
-    char info[50];
-    int n;
-    node * next;
+struct node {
+  char info[50];
+  int n;
+  node * next;
 
 };
-node *temp=new node;
-node*header=new node;
+node * temp = new node;
+node * header = new node;
 
+class link {
+  public: node * start;
+  link() {
+    start = NULL;
 
-class link
+  }
+  void input(char);
+  void display();
+  int TotalChars(char, node * );
+
+}
+l;
+
+int link::TotalChars(char c, node * temp) //CALCULATES AND RETURNS NO OF CHARACTERS
 {
-    public: node * start;
-             link()
-             {
-                 start=NULL;
+  int total = 0;
 
-             }
-             void input(char);
-             void display();
-             int TotalChars(char,node *);
+  int n = strlen(temp - > info);
 
-}l;
+  for (int i = 0; i <= n; i++) {
+    if (temp - > info[i] == c || temp - > info[i] == toupper(c) || temp - > info[i] == tolower(c))
+      total += 1;
+  }
 
-
-int link::TotalChars(char c,node *temp)   //CALCULATES AND RETURNS NO OF CHARACTERS
-{
-     int total=0;
-
-     int n=strlen(temp->info);
-
-
-           for(int i=0;i<=n;i++)
-           {
-               if(temp->info[i]==c||temp->info[i]==toupper(c)||temp->info[i]==tolower(c))
-                 total+=1;
-           }
-
-         return total;                   //RETURNS NUMBER OF CHARACTERS IN THE STRING
-
+  return total; //RETURNS NUMBER OF CHARACTERS IN THE STRING
 
 }
 
-
-
-void link::input(char c)           //TAKES INPUT
+void link::input(char c) //TAKES INPUT
 {
-    int n;
-    total++;
+  int n;
+  total++;
 
-   node *temp=new node;
-   node *ptr=NULL;
+  node * temp = new node;
+  node * ptr = NULL;
 
+  cout << "\n\nENTER THE STRING:";
+  cin >> temp - > info;
+  temp - > n = 0;
+  temp - > next = NULL;
 
+  n = TotalChars(c, temp); //CALLS TOTOALCHAR FUNCTION
 
-     cout<<"\n\nENTER THE STRING:";
-     cin>>temp->info;
-     temp->n=0;
-     temp->next=NULL;
+  temp - > n = n;
 
-     n=TotalChars(c,temp);     //CALLS TOTOALCHAR FUNCTION
+  if (start - > next == NULL) {
+    header - > next = temp;
 
-     temp->n=n;
+  } else {
 
+    ptr = start - > next;
 
-        if(start->next==NULL)
-          {
-             header->next=temp;
-
-          }
-
-        else
-            {
-
-             ptr=start->next;
-
-                 while(ptr->next!=NULL)
-                {
-                   ptr=ptr->next;
-
-                }
-
-           ptr->next=temp;
-
-            }
-
-           cout<<"\n\nSUCCESFULLY INSERTED\n\n";
-           system("pause");
-
-
+    while (ptr - > next != NULL) {
+      ptr = ptr - > next;
 
     }
 
+    ptr - > next = temp;
 
+  }
 
-void link::display()
-{
+  cout << "\n\nSUCCESFULLY INSERTED\n\n";
+  system("pause");
+
+}
+
+void link::display() {
+  clean();
+
+  if (start - > next == NULL) {
+    cout << "\nLINK LIST IS EMPTY\n";
+
+  } else {
+    node * temp = start;
+    node * ptr = start - > next;
+    cout << temp - > info << " CONTAINS TOTAL : " << temp - > n << " NODES";
+
+    cout << "\n\nLINK LIST IS:\n\n";
+    while (ptr != NULL) {
+      cout << "==> " << ptr - > info << " TOTAL OCCURENCE :" << ptr - > n;
+      cout << "\n\n";
+      ptr = ptr - > next;
+    }
+
+  }
+  cout << "\n";
+  system("pause");
+
+}
+
+int main() {
+  clean();
+  char a;
+  int i;
+
+  strcpy(header - > info, "\nTHIS IS A HEADER NODE"); //CREATING HEADER NODE;
+  header - > next = NULL;
+  l.start = header;
+  cout << "\nENTER THE CHARACTER WHOES OCCURENCE YOU WANT TO FIND:";
+  cin >> a;
+
+  while (1) {
     clean();
+    cout << "1.FOR INSERT\n\n";
+    cout << "2.FOR DISPLAY\n\n";
+    cout << "3.FOR EXIT\n\n\n";
+    cout << "ENTER YOUR CHOISE:";
+    cin >> i;
 
-    if(start->next==NULL)
-    {
-        cout<<"\nLINK LIST IS EMPTY\n";
+    switch (i) {
+    case 1:
+      l.input(a);
+      header - > n = total; //HEADER NODE TAKING TO NUMBERS OF NODES IN LINK LIST
+      break;
 
-    }
-    else
-    {   node *temp=start;
-        node * ptr=start->next;
-        cout<<temp->info<<" CONTAINS TOTAL : "<<temp->n<<" NODES";
+    case 2:
+      l.display();
+      break;
 
-        cout<<"\n\nLINK LIST IS:\n\n";
-         while(ptr!=NULL)
-       {
-        cout<<"==> "<<ptr->info<<" TOTAL OCCURENCE :"<<ptr->n;
-        cout<<"\n\n";
-        ptr=ptr->next;
-       }
+    case 3:
+      cout << "\nPROGRAM HAS BEEN SUCCESFULLY CLOSED\n";
+      exit(0);
 
-    }
-    cout<<"\n";
-   system("pause");
-
-}
-
-int main()
-{    clean();
-     char a;
-    int i;
-
-   strcpy(header->info,"\nTHIS IS A HEADER NODE");    //CREATING HEADER NODE;
-   header->next=NULL;
-   l.start=header;
-   cout<<"\nENTER THE CHARACTER WHOES OCCURENCE YOU WANT TO FIND:";
-   cin>>a;
-
-
-    while(1)
-    {   clean();
-        cout<<"1.FOR INSERT\n\n";
-        cout<<"2.FOR DISPLAY\n\n";
-        cout<<"3.FOR EXIT\n\n\n";
-        cout<<"ENTER YOUR CHOISE:";
-        cin>>i;
-
-        switch(i)
-        {
-            case 1: l.input(a);
-                    header->n=total;            //HEADER NODE TAKING TO NUMBERS OF NODES IN LINK LIST
-                     break;
-
-             case 2: l.display();
-                     break;
-
-             case 3: cout<<"\nPROGRAM HAS BEEN SUCCESFULLY CLOSED\n";
-                     exit(0);
-
-             default: cout<<"\nINVALID OPTION\n";
-                     break;
-
-
-        }
+    default:
+      cout << "\nINVALID OPTION\n";
+      break;
 
     }
 
-    return 0;
+  }
+
+  return 0;
 }
