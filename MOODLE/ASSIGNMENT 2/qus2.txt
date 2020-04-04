@@ -1,196 +1,170 @@
 #include<iostream>
+
 #include<stdlib.h>
 
 using namespace std;
 
-void clean()
-{
+void clean() {
 
-    system("cls");
-    cout<<"____________________________________________________________\n";
-    cout<<"\n              CREATED BY SACHIN PATWAL                \n";
-    cout<<"____________________________________________________________\n\n";
+  system("cls");
+  cout << "____________________________________________________________\n";
+  cout << "\n              CREATED BY SACHIN PATWAL                \n";
+  cout << "____________________________________________________________\n\n";
 }
-struct node
-{
-    int info;
-    node * next;
+struct node {
+  int info;
+  node * next;
 };
 
-class link
-{
-    private: node *start;
-              node * last;
+class link {
+  private: node * start;
+  node * last;
 
-    public: link()
-            {
-                start=NULL;
-                last=NULL;
-            };
+  public: link() {
+    start = NULL;
+    last = NULL;
+  };
 
+  void insertione();
 
-            void insertione();
+  void display();
+  void RemoveAllBut(int);
 
-            void display();
-            void RemoveAllBut(int);
+}
+l;
 
-}l;
+void link::insertione() {
+  node * temp = new node;
 
+  cout << "\n\nENTER THE ELEMENT:";
+  cin >> temp - > info;
+  temp - > next = NULL;
 
- void link::insertione()
- {
-     node *temp=new node;
+  if (start == NULL) {
+    start = temp;
+    last = temp;
 
-     cout<<"\n\nENTER THE ELEMENT:";
-     cin>>temp->info;
-     temp->next=NULL;
+  } else {
+    last - > next = temp;
+    last = last - > next;
 
-     if(start==NULL)
-    {
-        start=temp;
-        last=temp;
-
-    }
-     else
-     {
-         last->next=temp;
-         last=last->next;
-
-     }
-
- }
-
-
- void link:: RemoveAllBut(int x)
-  {
-      int f=0;
-      node* ptr=start;
-      node * prev=start;
-
-      node * temp=NULL;
-
-      while(ptr!=NULL)
-      {
-          if(start->info!=x)
-          {
-              if(ptr->next==NULL)
-              {
-                  start=NULL;
-                  ptr=NULL;
-                 f++;
-              }
-
-              else
-           {
-              temp=start;
-              start=start->next;
-              ptr=start;
-              prev=start;
-             delete(temp); }
-
-          }
-
-          else
-          {
-              if(ptr->info!=x)
-             {
-                while(ptr->info!=x&&ptr->next!=NULL)
-               {
-                    temp=ptr;
-                 ptr=ptr->next;
-                delete temp;
-
-               }
-
-             if(ptr->next==NULL)
-                prev->next=NULL;
-
-             else
-             {
-                 prev->next=ptr;
-                 prev=ptr; }
-
-                 }
-
-                 }
-
-
-                if(f==0)
-                  {
-
-                   prev=ptr;
-                  last=ptr;
-                 ptr=ptr->next;
-                  }
-
-
-  }  cout<<"\n\nDELETION SUCCESFUL\n\n";
-
-     system("pause");    }
-
-void link::display()
-{   clean();
-    node * p=start;
-   if(start==NULL)
-   {
-       cout<<"\n\nLIST IS EMPTY\n\n\n";
-   }
-   else
-   {
-
-
-   while(p!=NULL)
-   {
-
-       cout<<p->info<<" ==> ";
-       p=p->next;
-
-   }
-   cout<<"NULL";
-   cout<<"\n\n\n";
-   }
-   system("pause");
+  }
 
 }
 
+void link::RemoveAllBut(int x) {
+  int f = 0;
+  node * ptr = start;
+  node * prev = start;
 
- int main()
-{
-   clean();
+  node * temp = NULL;
 
-    while(1)
-    { int a;
-       clean();
-       cout<<"PRESS 1 FOR INSERT AN ELEMENT\n\n";
-       cout<<"PRESS 2 FOR CALL REMOVE FUNCTION\n\n";
-       cout<<"PRESS 3 FOR DISPLAY\n\n";
-       cout<<"PRESS 4 FOR EXIT\n\n\n";
-       cout<<"ENTER YOUR CHOISE:";
+  while (ptr != NULL) {
+    if (start - > info != x) {
+      if (ptr - > next == NULL) {
+        start = NULL;
+        ptr = NULL;
+        f++;
+      } else {
+        temp = start;
+        start = start - > next;
+        ptr = start;
+        prev = start;
+        delete(temp);
+      }
 
-       cin>>a;
-       switch(a)
-       {
-           case 1: l.insertione();
-                     break;
-           case 2: int x;
-                cout<<"\nENTER THE SPECIFIED ITEM:";
-                  cin>>x;
+    } else {
+      if (ptr - > info != x) {
+        while (ptr - > info != x && ptr - > next != NULL) {
+          temp = ptr;
+          ptr = ptr - > next;
+          delete temp;
 
-                l.RemoveAllBut(x);
-                     break;
+        }
 
-            case 3: l.display();
-                     break;
-            case 4: exit(0);
+        if (ptr - > next == NULL)
+          prev - > next = NULL;
 
-            default: cout<<"\n\nINVALID OPTION";
-                       break;
+        else {
+          prev - > next = ptr;
+          prev = ptr;
+        }
 
-       }
+      }
 
     }
- return 0;
 
+    if (f == 0) {
 
+      prev = ptr;
+      last = ptr;
+      ptr = ptr - > next;
+    }
+
+  }
+  cout << "\n\nDELETION SUCCESFUL\n\n";
+
+  system("pause");
+}
+
+void link::display() {
+  clean();
+  node * p = start;
+  if (start == NULL) {
+    cout << "\n\nLIST IS EMPTY\n\n\n";
+  } else {
+
+    while (p != NULL) {
+
+      cout << p - > info << " ==> ";
+      p = p - > next;
+
+    }
+    cout << "NULL";
+    cout << "\n\n\n";
+  }
+  system("pause");
+
+}
+
+int main() {
+  clean();
+
+  while (1) {
+    int a;
+    clean();
+    cout << "PRESS 1 FOR INSERT AN ELEMENT\n\n";
+    cout << "PRESS 2 FOR CALL REMOVE FUNCTION\n\n";
+    cout << "PRESS 3 FOR DISPLAY\n\n";
+    cout << "PRESS 4 FOR EXIT\n\n\n";
+    cout << "ENTER YOUR CHOISE:";
+
+    cin >> a;
+    switch (a) {
+    case 1:
+      l.insertione();
+      break;
+    case 2:
+      int x;
+      cout << "\nENTER THE SPECIFIED ITEM:";
+      cin >> x;
+
+      l.RemoveAllBut(x);
+      break;
+
+    case 3:
+      l.display();
+      break;
+    case 4:
+      exit(0);
+
+    default:
+      cout << "\n\nINVALID OPTION";
+      break;
+
+    }
+
+  }
+  return 0;
 
 }
